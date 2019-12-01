@@ -1,0 +1,2 @@
+### User
+GET http://localhost:9000/api/user/retrieve HTTP1.1

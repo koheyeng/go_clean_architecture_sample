@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  # postgres
+  postgres:
+    image: postgres:latest
+    container_name: "clean_arc_sample"
+    ports:
+      - "5432:15432"
+      environment:
+        POSTGRES_USER: sample
+        POSTGRES_PASSWORD: p@ssw0rd
+        POSTGRES_DB: sample
