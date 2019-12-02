@@ -22,16 +22,16 @@ type UsersPresenter interface {
 }
 
 type User struct {
-	repo       UsersRepository
-	gateway    OuterSystemGateway
-	outputPort UsersPresenter
+	repo      UsersRepository
+	gateway   OuterSystemGateway
+	presenter UsersPresenter
 }
 
-func NewUser(repo UsersRepository, gateway OuterSystemGateway, outputPort UsersPresenter) UsersInputPort {
+func NewUser(repo UsersRepository, gateway OuterSystemGateway, presenter UsersPresenter) UsersInputPort {
 	return &User{
-		repo:       repo,
-		gateway:    gateway,
-		outputPort: outputPort,
+		repo:      repo,
+		gateway:   gateway,
+		presenter: presenter,
 	}
 }
 
@@ -49,7 +49,7 @@ func (u *User) GetUserAge(dto UsersDto) error {
 		return fmt.Errorf(": %w", err)
 	}
 
-	if err := u.outputPort.RespUserAge(user.GetAge()); err != nil {
+	if err := u.presenter.RespUserAge(user.GetAge()); err != nil {
 		return fmt.Errorf(": %w", err)
 	}
 
