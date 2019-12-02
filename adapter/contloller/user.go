@@ -1,42 +1,35 @@
-package user
+package controller
 
 import (
 	"log"
 	"net/http"
 	"strconv"
 
-	"github.com/koheyeng/go_clean_architecture_sample/usecase/user"
+	"github.com/koheyeng/go_clean_architecture_sample/adapter/repository"
+	"github.com/koheyeng/go_clean_architecture_sample/usecase/users"
 )
 
-type User struct {
-	repositoryFactory func(user.DBHandler) user.UserRepository
-	outputFactory     func(http.ResponseWriter) user.UserOutputPort
-	inputFactory      func(user.UserRepository, user.UserOutputPort) user.UserInputPort
-	dbHandler         user.DBHandler
+type UserHandler struct {
+	dbHandler repository.DBHandler
 }
 
-func NewUser(dbHandler user.DBHandler, apiBaseURL string) *User {
-	return &User{
-		inputFactory: user.NewUser,
-		dbHandler:    dbHandler,
+func NewUser(dbHandler repository.DBHandler) *UserHandler {
+	return &UserHandler{
+		dbHandler: dbHandler,
 	}
 }
 
-func (u *User) GetUsers(w http.ResponseWriter, r *http.Request) {
-
-	repository := u.repositoryFactory(u.dbHandler)
-	outputPort := u.outputFactory(w)
-	inputPort := u.inputFactory(repository, outputPort)
+func (u *UserHandler) GetUserAge(w http.ResponseWriter, r *http.Request) {
 
 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 	if err != nil {
-
 	}
-	name := r.URL.Query().Get("name")
 
-	err = inputPort.GetUsers(user.UserDto{
-		ID:   id,
-		Name: name,
+	inputPort, err := initInputPort(u.dbHandler, w)
+	if err != nil {
+	}
+	err = inputPort.GetUserAge(users.UsersDto{
+		ID: id,
 	})
 	if err != nil {
 		log.Printf("%v\n", err)
