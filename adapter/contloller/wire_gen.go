@@ -19,6 +19,6 @@ func initInputPort(dbHandler repository.DBHandler, w http.ResponseWriter) (useca
 	usersRepository := repository.NewUsersRepository(dbHandler)
 	outerSystemGateway := gateway.NewOuterSystemGateway()
 	usersPresenter := presenter.NewUserOutputPort(w)
-	usersInputPort := usecase.NewUser(usersRepository, outerSystemGateway, usersPresenter)
+	usersInputPort := usecase.NewUsers(usersRepository, outerSystemGateway, usersPresenter)
 	return usersInputPort, nil
 }

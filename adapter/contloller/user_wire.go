@@ -15,11 +15,11 @@ import (
 
 func initInputPort(dbHandler repository.DBHandler, w http.ResponseWriter) (usecase.UsersInputPort, error) {
 	wire.Build(
-		usecase.NewUser,
+		usecase.NewUsers,
 		repository.NewUsersRepository,
 		gateway.NewOuterSystemGateway,
 		presenter.NewUserOutputPort,
 	)
 
-	return &usecase.User{}, nil
+	return &usecase.Users{}, nil
 }
