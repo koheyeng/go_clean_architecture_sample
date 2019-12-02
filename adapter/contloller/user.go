@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/koheyeng/go_clean_architecture_sample/adapter/repository"
-	"github.com/koheyeng/go_clean_architecture_sample/usecase/users"
+	"github.com/koheyeng/go_clean_architecture_sample/usecase"
 )
 
 type UserHandler struct {
@@ -28,7 +28,7 @@ func (u *UserHandler) GetUserAge(w http.ResponseWriter, r *http.Request) {
 	inputPort, err := initInputPort(u.dbHandler, w)
 	if err != nil {
 	}
-	err = inputPort.GetUserAge(users.UsersDto{
+	err = inputPort.GetUserAge(usecase.UsersDto{
 		ID: id,
 	})
 	if err != nil {

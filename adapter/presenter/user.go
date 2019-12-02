@@ -3,7 +3,7 @@ package presenter
 import (
 	"net/http"
 
-	"github.com/koheyeng/go_clean_architecture_sample/usecase/users"
+	"github.com/koheyeng/go_clean_architecture_sample/usecase"
 	"golang.org/x/xerrors"
 )
 
@@ -11,7 +11,7 @@ type usersPresenter struct {
 	respWriter http.ResponseWriter
 }
 
-func NewUserOutputPort(w http.ResponseWriter) users.UsersPresenter {
+func NewUserOutputPort(w http.ResponseWriter) usecase.UsersPresenter {
 	return &usersPresenter{
 		respWriter: w,
 	}

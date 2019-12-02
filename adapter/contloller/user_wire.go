@@ -8,7 +8,7 @@ import (
 	"github.com/koheyeng/go_clean_architecture_sample/adapter/gateway"
 	"github.com/koheyeng/go_clean_architecture_sample/adapter/presenter"
 	"github.com/koheyeng/go_clean_architecture_sample/adapter/repository"
-	usecase "github.com/koheyeng/go_clean_architecture_sample/usecase/users"
+	"github.com/koheyeng/go_clean_architecture_sample/usecase"
 
 	"github.com/google/wire"
 )

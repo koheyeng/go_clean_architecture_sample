@@ -9,16 +9,16 @@ import (
 	"github.com/koheyeng/go_clean_architecture_sample/adapter/gateway"
 	"github.com/koheyeng/go_clean_architecture_sample/adapter/presenter"
 	"github.com/koheyeng/go_clean_architecture_sample/adapter/repository"
-	"github.com/koheyeng/go_clean_architecture_sample/usecase/users"
+	"github.com/koheyeng/go_clean_architecture_sample/usecase"
 	"net/http"
 )
 
 // Injectors from user_wire.go:
 
-func initInputPort(dbHandler repository.DBHandler, w http.ResponseWriter) (users.UsersInputPort, error) {
+func initInputPort(dbHandler repository.DBHandler, w http.ResponseWriter) (usecase.UsersInputPort, error) {
 	usersRepository := repository.NewUsersRepository(dbHandler)
 	outerSystemGateway := gateway.NewOuterSystemGateway()
 	usersPresenter := presenter.NewUserOutputPort(w)
-	usersInputPort := users.NewUser(usersRepository, outerSystemGateway, usersPresenter)
+	usersInputPort := usecase.NewUser(usersRepository, outerSystemGateway, usersPresenter)
 	return usersInputPort, nil
 }

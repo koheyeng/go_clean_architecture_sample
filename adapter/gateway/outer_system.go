@@ -1,13 +1,13 @@
 package gateway
 
 import (
-	"github.com/koheyeng/go_clean_architecture_sample/usecase/users"
+	"github.com/koheyeng/go_clean_architecture_sample/usecase"
 )
 
 type outerSystemGateway struct {
 }
 
-func NewOuterSystemGateway() users.OuterSystemGateway {
+func NewOuterSystemGateway() usecase.OuterSystemGateway {
 	return &outerSystemGateway{}
 }
 

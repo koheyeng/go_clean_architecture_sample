@@ -3,7 +3,7 @@ package repository
 import (
 	"github.com/golang/xerrors"
 	"github.com/koheyeng/go_clean_architecture_sample/domain"
-	"github.com/koheyeng/go_clean_architecture_sample/usecase/users"
+	"github.com/koheyeng/go_clean_architecture_sample/usecase"
 )
 
 type usersRepository struct {
@@ -16,13 +16,13 @@ type DBHandler interface {
 	ByName(string, string) DBHandler
 }
 
-func NewUsersRepository(dbHandler DBHandler) users.UsersRepository {
+func NewUsersRepository(dbHandler DBHandler) usecase.UsersRepository {
 	return &usersRepository{
 		dbHandler: dbHandler,
 	}
 }
 
-func (e *usersRepository) GetUser(dto users.UsersDto) (*domain.Users, error) {
+func (e *usersRepository) GetUser(dto usecase.UsersDto) (*domain.Users, error) {
 
 	user, err := e.dbHandler.ByID(dto.ID).Query()
 	if err != nil {
