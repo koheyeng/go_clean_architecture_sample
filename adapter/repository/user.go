@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"github.com/golang/xerrors"
 	"github.com/koheyeng/go_clean_architecture_sample/domain"
 	"github.com/koheyeng/go_clean_architecture_sample/usecase"
+	"golang.org/x/xerrors"
 )
 
 type usersRepository struct {
